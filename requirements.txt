@@ -4,3 +4,4 @@ ipython
 python-dotenv
 
 scrapy-deltafetch
+pandas

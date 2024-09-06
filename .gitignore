@@ -1,5 +1,7 @@
 .env
 __pycache__
+.venv
+*.csv
 
 /.vagrant
 /scrapy.iml
