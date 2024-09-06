@@ -1,0 +1,6 @@
+requests
+scrapy
+ipython
+python-dotenv
+
+scrapy-deltafetch
