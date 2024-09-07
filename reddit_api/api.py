@@ -10,7 +10,6 @@ class RedditScraper:
     def __init__(self, **credentials):
         self.credentials = credentials
         self.headers = self.get_authentication()
-        print(self.headers)
 
     def get_authentication(self):
         """get temporary reddit api OAuth"""

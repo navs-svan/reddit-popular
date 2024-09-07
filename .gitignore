@@ -3,7 +3,7 @@ __pycache__
 .venv
 *.csv
 test.py
-data.json
+*.json
 
 /.vagrant
 /scrapy.iml

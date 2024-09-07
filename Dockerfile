@@ -10,6 +10,6 @@ RUN pip install -r requirements.txt
 
 COPY . /app/
 
-WORKDIR /app/reddit_ph/reddit_ph
+WORKDIR /app/reddit_scraper/reddit_scraper
 
 CMD ["scrapy", ]

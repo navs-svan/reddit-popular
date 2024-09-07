@@ -1,4 +1,4 @@
-# Scrapy settings for reddit_ph project
+# Scrapy settings for reddit_scraper project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,20 +7,22 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = "reddit_ph"
+BOT_NAME = "reddit_scraper"
 
-SPIDER_MODULES = ["reddit_ph.spiders"]
-NEWSPIDER_MODULE = "reddit_ph.spiders"
+SPIDER_MODULES = ["reddit_scraper.spiders"]
+NEWSPIDER_MODULE = "reddit_scraper.spiders"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = "reddit_ph (+http://www.yourdomain.com)"
+# USER_AGENT = "reddit_scraper (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
 
-FEEDS = {"data.csv": {"format": "csv", "overwrite": True}}
+FEEDS = {
+    "data.csv": {"format": "csv", "overwrite": True, "include_headers_line": False}
+}
 
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
@@ -49,13 +51,13 @@ CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
-#    "reddit_ph.middlewares.RedditPhSpiderMiddleware": 543,
+#    "reddit_scraper.middlewares.RedditPhSpiderMiddleware": 543,
 # }
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
-#    "reddit_ph.middlewares.RedditPhDownloaderMiddleware": 543,
+#    "reddit_scraper.middlewares.RedditPhDownloaderMiddleware": 543,
 # }
 
 # Enable or disable extensions
@@ -67,7 +69,7 @@ CONCURRENT_REQUESTS_PER_DOMAIN = 16
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 # ITEM_PIPELINES = {
-#    "reddit_ph.pipelines.RedditPhPipeline": 300,
+#    "reddit_scraper.pipelines.RedditPhPipeline": 300,
 # }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
