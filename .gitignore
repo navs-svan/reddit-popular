@@ -2,6 +2,8 @@
 __pycache__
 .venv
 *.csv
+test.py
+data.json
 
 /.vagrant
 /scrapy.iml
