@@ -52,7 +52,7 @@ class RedditScraper:
 
 if __name__ == "__main__":
 
-    env_path = Path().resolve().parent.parent / ".env"
+    env_path = Path(__file__).resolve().parent.parent.parent / ".env"
     env_file = load_dotenv(env_path)
 
     credential = {

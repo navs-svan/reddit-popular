@@ -12,8 +12,8 @@ from scrapy.utils.project import get_project_settings
 
 
 if __name__ == "__main__":
-    filepath = Path().resolve()
-    env_path = filepath.parent / ".env"
+    filepath = Path(__file__).resolve()
+    env_path = filepath.parent.parent / ".env"
     env_file = load_dotenv(env_path)
     cur_date = datetime.today().strftime("%Y-%m-%d")
 
@@ -35,7 +35,6 @@ if __name__ == "__main__":
     process.crawl(RedspiderSpider, country=country)
     process.start()
 
-
     if not os.path.exists("local_data"):
         os.makedirs("local_data")
 
@@ -48,6 +47,3 @@ if __name__ == "__main__":
             filename = filepath / "local_data" / f"{link[0].replace('/', '_')}{cur_date}.json"
             with open(filename, "w") as f:
                 json.dump(details, f, indent=4)
-
-
-    
