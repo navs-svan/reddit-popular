@@ -20,7 +20,7 @@ def transform_data(json_data: json):
             "subreddit_name_prefixed"
         ],
         "author": json_data[0]["data"]["children"][0]["data"]["author"],
-        "url": json_data[0]["data"]["children"][0]["data"]["url"],
+        "url": json_data[0]["data"]["children"][0]["data"]["permalink"],
         "nsfw": json_data[0]["data"]["children"][0]["data"]["over_18"],
         "score": json_data[0]["data"]["children"][0]["data"]["score"],
         "self_text": json_data[0]["data"]["children"][0]["data"]["selftext"],
@@ -72,3 +72,5 @@ if __name__ == "__main__":
 
         filename = filepath.parent / "local_data" / f"{country}_{cur_date}.parquet"
         save_data(dict_list, filename)
+    
+    os.remove(filepath.parent / "data.csv")

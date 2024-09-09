@@ -5,7 +5,7 @@ __pycache__
 test.py
 *.json
 variables.tf
-
+*.parquet
 
 /.vagrant
 /scrapy.iml

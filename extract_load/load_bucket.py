@@ -39,4 +39,4 @@ if __name__ == "__main__":
     for path in pathlist:
         upload_to_gcs(BUCKET, f"{cur_date}/{str(path.name)}", str(path))
 
-        # os.remove(path)
+        os.remove(path)

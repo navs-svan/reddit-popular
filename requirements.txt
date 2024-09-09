@@ -2,7 +2,9 @@ requests
 scrapy
 ipython
 python-dotenv
+pandas
+pyarrow
 
 scrapy-deltafetch
-pandas
+google-cloud-bigquery
 google-cloud-storage
