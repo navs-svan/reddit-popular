@@ -56,10 +56,10 @@ if __name__ == "__main__":
     country = "PH"
     cur_date = datetime.today().strftime("%Y-%m-%d")
 
-    # settings = get_project_settings()
-    # process = CrawlerProcess(settings)
-    # process.crawl(RedspiderSpider, country=country)
-    # process.start()
+    settings = get_project_settings()
+    process = CrawlerProcess(settings)
+    process.crawl(RedspiderSpider, country=country)
+    process.start()
 
     if not os.path.exists("local_data"):
         os.makedirs("local_data")
@@ -69,12 +69,6 @@ if __name__ == "__main__":
         next(links, None)
 
         dict_list = [transform_data(app.get_post_details(link[0])) for link in links]
-        # for link in links:
-        #     details = app.get_post_details(link[0])
-        #     # filename = filepath.parent / "local_data" / f"{link[0].replace('/', '_')}.json"
-        #     # with open(filename, "w") as f:
-        #     #     json.dump(details, f, indent=4)
-        #     print(transform_data(details))
 
         filename = filepath.parent / "local_data" / f"{country}_{cur_date}.parquet"
         save_data(dict_list, filename)
