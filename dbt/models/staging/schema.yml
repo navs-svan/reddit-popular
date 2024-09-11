@@ -1,0 +1,24 @@
+version: 2
+
+sources:
+    - name: staging
+      database: reddit-popular
+      schema: reddit_popular_dataset
+
+      tables:
+          - name: PH
+            freshness:
+              error_after: {count: 6, period: day}
+          - name: MY
+            freshness:
+              error_after: {count: 6, period: day}
+          - name: SG
+            freshness:
+              error_after: {count: 6, period: day}
+          - name: TH
+            freshness:
+              error_after: {count: 6, period: day}
+          - name: global
+            freshness:
+              error_after: {count: 6, period: day}
+            
