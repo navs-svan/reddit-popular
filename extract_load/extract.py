@@ -3,6 +3,7 @@ import json
 import os
 import pandas as pd
 from datetime import datetime
+from multiprocessing import Process
 
 from pathlib import Path
 from dotenv import load_dotenv
@@ -37,6 +38,38 @@ def save_data(transformed_data: list, filename: Path):
     df.to_parquet(filename)
 
 
+
+def execute_crawling(country: str, cur_date: str, filepath: Path, app: RedditScraper):
+    settings = {
+            "FEEDS": {
+                f"{country}.csv": {"format": "csv", "overwrite": True},
+            },
+            "CLOSESPIDER_PAGECOUNT": 1,
+            "DOWNLOAD_DELAY": 5,
+            "CONCURRENT_REQUESTS_PER_DOMAIN": 16,
+        }
+    process = CrawlerProcess(settings)
+    process.crawl(RedspiderSpider, country=country)
+    process.start()
+
+    if not os.path.exists("local_data"):
+        os.makedirs("local_data")
+
+    with open(filepath.parent / f"{country}.csv", "r", encoding="utf8") as f:
+        links = csv.reader(f)
+        next(links, None)
+
+        dict_list = [
+            transform_data(app.get_post_details(link[0])) for link in links
+        ]
+
+        filename = filepath.parent / "local_data" / f"{country}_{cur_date}.parquet"
+        save_data(dict_list, filename)
+
+    os.remove(filepath.parent / f"{country}.csv")
+
+
+
 if __name__ == "__main__":
     filepath = Path(__file__).resolve()
     env_path = filepath.parent.parent / ".env"
@@ -53,24 +86,11 @@ if __name__ == "__main__":
 
     # scrape links from r/popular using scraper
 
-    country = "PH"
+    countries = ("PH", "global", "MY", "SG", "TH")
     cur_date = datetime.today().strftime("%Y-%m-%d")
 
-    settings = get_project_settings()
-    process = CrawlerProcess(settings)
-    process.crawl(RedspiderSpider, country=country)
-    process.start()
-
-    if not os.path.exists("local_data"):
-        os.makedirs("local_data")
-
-    with open(filepath.parent / "data.csv", "r", encoding="utf8") as f:
-        links = csv.reader(f)
-        next(links, None)
-
-        dict_list = [transform_data(app.get_post_details(link[0])) for link in links]
-
-        filename = filepath.parent / "local_data" / f"{country}_{cur_date}.parquet"
-        save_data(dict_list, filename)
-    
-    os.remove(filepath.parent / "data.csv")
+    for country in countries:
+        p = Process(target=execute_crawling, args=(country, cur_date, filepath, app))
+        p.start()
+        p.join()        
+        
