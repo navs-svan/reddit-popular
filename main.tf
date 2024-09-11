@@ -34,3 +34,22 @@ resource "google_bigquery_dataset" "redit-bq" {
   location                   = var.location
   delete_contents_on_destroy = true
 }
+
+
+resource "google_bigquery_dataset" "bq_dev" {
+  dataset_id                 = var.bq_dev
+  location                   = var.location
+  delete_contents_on_destroy = true
+}
+
+resource "google_bigquery_dataset" "bq_prod" {
+  dataset_id                 = var.bq_prod
+  location                   = var.location
+  delete_contents_on_destroy = true
+}
+
+resource "google_bigquery_dataset" "bq_dbt" {
+  dataset_id                 = var.bq_dbt
+  location                   = var.location
+  delete_contents_on_destroy = true
+}
