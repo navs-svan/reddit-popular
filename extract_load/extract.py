@@ -13,7 +13,7 @@ from reddit_scraper.spiders.redspider import RedspiderSpider
 from scrapy.crawler import CrawlerProcess
 
 
-def transform_data(json_data: json, cur_date:str ):
+def transform_data(json_data: json):
     details_dict = {
         "title": json_data[0]["data"]["children"][0]["data"]["title"],
         "subreddit": json_data[0]["data"]["children"][0]["data"][
@@ -27,7 +27,6 @@ def transform_data(json_data: json, cur_date:str ):
         "upvote_ratio": json_data[0]["data"]["children"][0]["data"]["upvote_ratio"],
         "awards": json_data[0]["data"]["children"][0]["data"]["total_awards_received"],
         "time": json_data[0]["data"]["children"][0]["data"]["created"],
-        "date_popular": cur_date
     }
 
     return details_dict
@@ -38,16 +37,15 @@ def save_data(transformed_data: list, filename: Path):
     df.to_parquet(filename)
 
 
-
 def execute_crawling(country: str, cur_date: str, filepath: Path, app: RedditScraper):
     settings = {
-            "FEEDS": {
-                f"{country}.csv": {"format": "csv", "overwrite": True},
-            },
-            "CLOSESPIDER_PAGECOUNT": 1,
-            "DOWNLOAD_DELAY": 5,
-            "CONCURRENT_REQUESTS_PER_DOMAIN": 16,
-        }
+        "FEEDS": {
+            f"{country}.csv": {"format": "csv", "overwrite": True},
+        },
+        "CLOSESPIDER_PAGECOUNT": 1,
+        "DOWNLOAD_DELAY": 5,
+        "CONCURRENT_REQUESTS_PER_DOMAIN": 16,
+    }
     process = CrawlerProcess(settings)
     process.crawl(RedspiderSpider, country=country)
     process.start()
@@ -59,15 +57,12 @@ def execute_crawling(country: str, cur_date: str, filepath: Path, app: RedditScr
         links = csv.reader(f)
         next(links, None)
 
-        dict_list = [
-            transform_data(app.get_post_details(link[0]), cur_date) for link in links
-        ]
+        dict_list = [transform_data(app.get_post_details(link[0])) for link in links]
 
         filename = filepath.parent / "local_data" / f"{country}_{cur_date}.parquet"
         save_data(dict_list, filename)
 
     os.remove(filepath.parent / f"{country}.csv")
-
 
 
 if __name__ == "__main__":
@@ -92,5 +87,4 @@ if __name__ == "__main__":
     for country in countries:
         p = Process(target=execute_crawling, args=(country, cur_date, filepath, app))
         p.start()
-        p.join()        
-        
+        p.join()
