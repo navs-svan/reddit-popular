@@ -2,7 +2,7 @@
 
 
 select
-    {{ dbt_utils.surrogate_key(['title', 'subreddit', 'author']) }} as post_id,
+    {{ dbt_utils.surrogate_key(['title', 'subreddit', 'author', 'CURRENT_TIMESTAMP()']) }} as post_id,
     title,
     subreddit,
     author,
@@ -12,7 +12,8 @@ select
     self_text,
     upvote_ratio,
     awards,
-    timestamp_seconds(cast(time as integer)) as date_posted
+    timestamp_seconds(cast(time as integer)) as date_posted,
+    CURRENT_TIMESTAMP() as date_popular
 
 from {{ source('staging', 'TH')}}
 
