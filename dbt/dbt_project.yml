@@ -38,6 +38,3 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   reddit_popular:
     # Applies to all files under models/example/
-
-vars:
-    "dbt_date:time_zone": "Asia/Manila"

@@ -1,0 +1,41 @@
+models:
+  - name: reddit_details
+    description: >
+      Contains the details of reddit posts included in r/popular for Malaysia, Philippines, Singapore, Thailand, and Global Regions
+    columns:
+      - name: post_id
+        description: >
+          Unique identifier of records based on title, author, subreddit, and date_popular. The same reddit post can be in r/popular 
+          on different dates.  
+        tests:
+          - unique:
+              severity: warn
+      - name: title
+        description: The title of the reddit post
+      - name: subreddit
+        description: The subreddit where the post belongs to
+      - name: author
+        description: The author of the reddit post
+      - name: post_url
+        description: The link to the reddit post
+      - name: nsfw
+        description: Boolean value indicating whether the post is NSFW or not
+        tests:
+          - accepted_values:
+              values: [false, true]
+              severity: warn
+              quote: false
+      - name: score
+        description: The number of upvotes the reddit post has
+      - name: self_text
+        description: The selftext or description of the reddit post which can be null
+      - name: upvote_ratio
+        description: The ratio of upvotes to downvotes
+      - name: awards
+        description: The number of awards the post has
+      - name: date_posted
+        description: The date the reddit post was posted
+      - name: date_popular
+        description: The date the reddit post was in r/popular
+      - name: country
+        description: The region where the reddit post was popular on
