@@ -4,6 +4,7 @@ import os
 import requests
 import sys
 import json
+import time
 
 
 class RedditScraper:
@@ -45,9 +46,21 @@ class RedditScraper:
         """gets post details and saves it to the database"""
 
         endpoint = "https://oauth.reddit.com" + link
-        r = requests.get(endpoint, headers=self.headers)
+        r = self.reddit_request(endpoint)
 
         return r.json()
+
+    def reddit_request(self, link):
+        for _ in range(3):
+            try:
+                r = requests.get(link, headers=self.headers, timeout=30)
+            except requests.exceptions.Timeout as err:
+                time.sleep(5)
+            except requests.exceptions.RequestException as err:
+                sys.exit()
+            break
+
+        return r
 
 
 if __name__ == "__main__":

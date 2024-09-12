@@ -11,10 +11,9 @@ from reddit_api.api import RedditScraper
 
 from reddit_scraper.spiders.redspider import RedspiderSpider
 from scrapy.crawler import CrawlerProcess
-from scrapy.utils.project import get_project_settings
 
 
-def transform_data(json_data: json):
+def transform_data(json_data: json, cur_date:str ):
     details_dict = {
         "title": json_data[0]["data"]["children"][0]["data"]["title"],
         "subreddit": json_data[0]["data"]["children"][0]["data"][
@@ -28,6 +27,7 @@ def transform_data(json_data: json):
         "upvote_ratio": json_data[0]["data"]["children"][0]["data"]["upvote_ratio"],
         "awards": json_data[0]["data"]["children"][0]["data"]["total_awards_received"],
         "time": json_data[0]["data"]["children"][0]["data"]["created"],
+        "date_popular": cur_date
     }
 
     return details_dict
@@ -60,7 +60,7 @@ def execute_crawling(country: str, cur_date: str, filepath: Path, app: RedditScr
         next(links, None)
 
         dict_list = [
-            transform_data(app.get_post_details(link[0])) for link in links
+            transform_data(app.get_post_details(link[0]), cur_date) for link in links
         ]
 
         filename = filepath.parent / "local_data" / f"{country}_{cur_date}.parquet"

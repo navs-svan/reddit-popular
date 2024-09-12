@@ -55,6 +55,5 @@ if __name__ == "__main__":
     cur_date = datetime.today().strftime("%Y-%m-%d")
 
     for uri in retrieve_gcs_files_uri(storage_client, BUCKET, cur_date):
-        print(uri)
         country = uri.split("/")[-1].split("_")[0]
         upload_to_bq(bq_client, DATASET, country, uri)
