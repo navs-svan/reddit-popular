@@ -32,7 +32,7 @@ models:
         description: >
           Unique identifier of records based on title, author, subreddit, and date_popular. The same reddit post can be in r/popular 
           on different dates.  
-        tests:
+        data_tests:
           - unique:
               severity: warn
       - name: title
@@ -45,7 +45,7 @@ models:
         description: The link to the reddit post
       - name: nsfw
         description: Boolean value indicating whether the post is NSFW or not
-        tests:
+        data_tests:
           - accepted_values:
               values: [false, true]
               severity: warn
@@ -71,7 +71,7 @@ models:
         description: >
           Unique identifier of records based on title, author, subreddit, and date_popular. The same reddit post can be in r/popular 
           on different dates.  
-        tests:
+        data_tests:
           - unique:
               severity: warn
       - name: title
@@ -84,7 +84,7 @@ models:
         description: The link to the reddit post
       - name: nsfw
         description: Boolean value indicating whether the post is NSFW or not
-        tests:
+        data_tests:
           - accepted_values:
               values: [false, true]
               severity: warn
@@ -110,7 +110,7 @@ models:
         description: >
           Unique identifier of records based on title, author, subreddit, and date_popular. The same reddit post can be in r/popular 
           on different dates.  
-        tests:
+        data_tests:
           - unique:
               severity: warn
       - name: title
@@ -123,7 +123,7 @@ models:
         description: The link to the reddit post
       - name: nsfw
         description: Boolean value indicating whether the post is NSFW or not
-        tests:
+        data_tests:
           - accepted_values:
               values: [false, true]
               severity: warn
@@ -149,7 +149,7 @@ models:
         description: >
           Unique identifier of records based on title, author, subreddit, and date_popular. The same reddit post can be in r/popular 
           on different dates.  
-        tests:
+        data_tests:
           - unique:
               severity: warn
       - name: title
@@ -162,7 +162,7 @@ models:
         description: The link to the reddit post
       - name: nsfw
         description: Boolean value indicating whether the post is NSFW or not
-        tests:
+        data_tests:
           - accepted_values:
               values: [false, true]
               severity: warn
@@ -188,7 +188,7 @@ models:
         description: >
           Unique identifier of records based on title, author, subreddit, and date_popular. The same reddit post can be in r/popular 
           on different dates.  
-        tests:
+        data_tests:
           - unique:
               severity: warn
       - name: title
@@ -201,7 +201,7 @@ models:
         description: The link to the reddit post
       - name: nsfw
         description: Boolean value indicating whether the post is NSFW or not
-        tests:
+        data_tests:
           - accepted_values:
               values: [false, true]
               severity: warn
