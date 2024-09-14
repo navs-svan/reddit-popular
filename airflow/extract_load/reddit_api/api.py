@@ -57,10 +57,10 @@ class RedditScraper:
             except requests.exceptions.Timeout as err:
                 time.sleep(5)
             except requests.exceptions.RequestException as err:
+                print(err)
                 sys.exit()
-            break
-
-        return r
+            else:
+                return r
 
 
 if __name__ == "__main__":

@@ -40,9 +40,9 @@ def save_data(transformed_data: list, filename: Path):
 def execute_crawling(country: str, cur_date: str, filepath: Path, app: RedditScraper):
     settings = {
         "FEEDS": {
-            f"{country}.csv": {"format": "csv", "overwrite": True},
+            f"{filepath.parent}/{country}.csv": {"format": "csv", "overwrite": True},
         },
-        "CLOSESPIDER_PAGECOUNT": 1,
+        "CLOSESPIDER_PAGECOUNT": 4,
         "DOWNLOAD_DELAY": 5,
         "CONCURRENT_REQUESTS_PER_DOMAIN": 16,
     }

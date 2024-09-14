@@ -8,3 +8,4 @@ pyarrow
 scrapy-deltafetch
 google-cloud-bigquery
 google-cloud-storage
+apache-airflow-providers-google

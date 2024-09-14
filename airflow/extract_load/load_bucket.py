@@ -37,6 +37,7 @@ if __name__ == "__main__":
 
     pathlist = (filepath.parent / "local_data").glob("*.parquet")
     for path in pathlist:
+        print(f"Uploading {path} to {cur_date}/{str(path.name)}")
         upload_to_gcs(BUCKET, f"{cur_date}/{str(path.name)}", str(path))
 
         os.remove(path)
