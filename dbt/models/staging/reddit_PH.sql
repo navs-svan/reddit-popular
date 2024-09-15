@@ -13,7 +13,7 @@ select
     upvote_ratio,
     awards,
     timestamp_seconds(cast(time as integer)) as date_posted,
-    CURRENT_TIMESTAMP() as date_popular
+    FORMAT_DATETIME('%F', cast(date_popular as datetime)) as date_popular
 
 from {{ source('staging', 'PH')}}
 
