@@ -2,7 +2,7 @@
 
 
 select
-    {{ dbt_utils.surrogate_key(['title', 'subreddit', 'author', 'CURRENT_TIMESTAMP()']) }} as post_id,
+    {{ dbt_utils.surrogate_key(['title', 'subreddit', 'author', 'date_popular']) }} as post_id,
     title,
     subreddit,
     author,
