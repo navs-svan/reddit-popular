@@ -4,6 +4,8 @@ import os
 import pandas as pd
 from datetime import datetime
 from multiprocessing import Process
+import concurrent.futures
+import itertools
 
 from pathlib import Path
 from dotenv import load_dotenv
@@ -33,6 +35,13 @@ def transform_data(json_data: json, cur_date: str):
     return details_dict
 
 
+def retrieve_data(post_url: list, cur_date: str, app: RedditScraper):
+    post_url = post_url[0]
+    post_details = transform_data(app.get_post_details(post_url), cur_date)
+
+    return post_details
+
+
 def save_data(transformed_data: list, filename: Path):
     df = pd.DataFrame(transformed_data)
     df.to_parquet(filename)
@@ -58,12 +67,14 @@ def execute_crawling(country: str, cur_date: str, filepath: Path, app: RedditScr
         links = csv.reader(f)
         next(links, None)
 
-        dict_list = [
-            transform_data(app.get_post_details(link[0]), cur_date) for link in links
-        ]
+        iter_date = itertools.repeat(cur_date)
+        iter_app = itertools.repeat(app)
+
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            results = executor.map(retrieve_data, links, iter_date, iter_app)
 
         filename = filepath.parent / "local_data" / f"{country}_{cur_date}.parquet"
-        save_data(dict_list, filename)
+        save_data(results, filename)
 
     os.remove(filepath.parent / f"{country}.csv")
 
@@ -91,3 +102,7 @@ if __name__ == "__main__":
         p = Process(target=execute_crawling, args=(country, cur_date, filepath, app))
         p.start()
         p.join()
+
+    # p = Process(target=execute_crawling, args=("PH", cur_date, filepath, app))
+    # p.start()
+    # p.join()
