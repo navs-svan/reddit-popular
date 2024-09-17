@@ -2,31 +2,31 @@
 
 with ph_data as (
     select *, 
-        'PH' as country 
+        'Philippines' as country 
     from {{ ref('reddit_PH') }}
 ), 
 
 my_data as (
     select *,
-        'MY' as country
+        'Malaysia' as country
     from {{ ref('reddit_MY') }}
 ),
 
 sg_data as (
     select *,
-        'SG' as country
+        'Singapore' as country
     from {{ ref('reddit_SG') }}
 ),
 
 th_data as (
     select *,
-        'TH' as country
+        'Thailand' as country
     from {{ ref('reddit_TH') }}
 ),
 
 global_data as (
     select *,
-        'GLOBAL' as country
+        'Global' as country
     from {{ ref('reddit_global') }}
 ),
 
