@@ -45,7 +45,9 @@ This project was also made with the desire to practice several tools in handling
 
 ## How this pipeline works
 
-1. The pipeline starts by scraping the post urls from r/popular since Reddit API currently does not support this feature (to my knowledge). Each post url is then passed through the Reddit API to obtain the post details. The api returns a JSON object, and the script extracts the necessary details. The post details are turned into a `pandas Dataframe` and then saved into a parquet file.
+1. The pipeline starts by scraping the post urls from r/popular since Reddit API currently does not support this feature (to my knowledge). There is this [endpoint](https://www.reddit.com/dev/api/#GET_{sort}) but I do not know if this will work with specific regions or just the whole subreddit in general.
+
+     Each post url is then passed through the Reddit API to obtain the post details. The api returns a JSON object, and the script extracts the necessary details. The post details are turned into a `pandas Dataframe` and then saved into a parquet file.
 
     * See [extract.py](./airflow/extract_load/extract.py)
 
