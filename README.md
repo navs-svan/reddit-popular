@@ -3,7 +3,7 @@
 
 This project extracts Reddit data from [r/popular](https://www.reddit.com/r/popular/) through a combination of web scraping and API calls. The final output, which is shown below, is a Google Data Studio report showcasing the popular subreddits in each of the available regions of Southeast Asia (Malaysia, Philippines, Singapore, and Thailand). 
 
-[<img src="./images/Dashboard.png">](https://lookerstudio.google.com/reporting/96069bbf-320f-45f0-8130-c95e1a274106)
+[<img src="./readme_images/Dashboard.png">](https://lookerstudio.google.com/reporting/96069bbf-320f-45f0-8130-c95e1a274106)
 
 * The Google Data Studio dashboard can be interacted with through this [link](https://datastudio.google.com/reporting/e927fef6-b605-421c-ae29-89a66e11ea18).
 
