@@ -3,7 +3,7 @@ __pycache__
 .venv
 *.csv
 test.py
-*.json
+keys.json
 variables.tf
 *.parquet
 
