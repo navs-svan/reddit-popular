@@ -5,7 +5,7 @@ This project extracts Reddit data from [r/popular](https://www.reddit.com/r/popu
 
 [<img src="./readme_images/Dashboard.png">](https://lookerstudio.google.com/reporting/96069bbf-320f-45f0-8130-c95e1a274106)
 
-* The Google Data Studio dashboard can be interacted with through this [link](https://datastudio.google.com/reporting/e927fef6-b605-421c-ae29-89a66e11ea18).
+* The Google Data Studio dashboard can be interacted with through this [link]([https://datastudio.google.com/reporting/e927fef6-b605-421c-ae29-89a66e11ea18](https://lookerstudio.google.com/reporting/96069bbf-320f-45f0-8130-c95e1a274106)).
 
 
 ## Observations
