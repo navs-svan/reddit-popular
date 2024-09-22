@@ -35,7 +35,7 @@ class RedditScraper:
             )
         except:
             print("ERROR IN ACCESSING TOKEN")
-            sys.exit()
+            sys.exit(1)
 
         token = res.json()["access_token"]
         headers = {**headers, **{"Authorization": f"bearer {token}"}}
